@@ -66,3 +66,8 @@
     border: 0.1vmin solid grey;
     color: grey;
   }
+#notes {
+  color: darkslateblue;
+  font-size: 2vmin; 
+  font-weight: bold; 
+}

@@ -6,16 +6,17 @@ const VALUES = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 
 let board;
 let playerHand;
 let dealerHand;
-let currentChips;
 let currentBet;
 let turn;
 let winner;
 let playerTotal;
 let dealerTotal;
+let currentChips = 100;
 
 /*----- cached elements  -----*/
 const betVal = document.querySelector('#betVal');
 const chipsVal= document.querySelector('#chips');
+const messageEl = document.querySelector('#message');
 /*----- event listeners -----*/
 document.querySelector('#bet').addEventListener('click',bet);
 document.querySelector('#hit').addEventListener('click',hit);
@@ -28,7 +29,6 @@ document.querySelector('#continue').addEventListener('click', init);
 init();
 // The init function is to initialize all state, then call render()
 function init() {
-  currentChips = 100;
   currentBet = 0;
   board = [];
   playerHand = [];
@@ -37,22 +37,31 @@ function init() {
   dealerTotal = 0;
   winner = null;
   turn =playerHand;
-  //chipsVal.innerHTML = `chips:${currentChips}`;
-  document.querySelector('#bet').disabled = false;
-  document.querySelector('#hit').disabled = false;
-  document.querySelector('#stand').disabled = false;
-  document.querySelector('#deal').disabled = false;
-  clearBoard();
   render();
-
 }
 function render() {
     generateBoard();
-   renderMessages();
+    clearBoard();
+    renderMessages();
+    renderControls();
 }
+function renderControls() {
+    messageEl.textContent = '';
+    document.querySelector('#bet').disabled = false;
+    document.querySelector('#hit').disabled = false;
+    document.querySelector('#stand').disabled = false;
+    document.querySelector('#deal').disabled = false;
+  
 
-function renderMessages() {
-    
+}
+function renderMessages(result) {
+    if (result === 'win'){
+        messageEl.textContent = 'You win!';
+    } else if (result === 'lose') {
+        messageEl.textContent = 'You lose!';
+    } else if (result === 'push') {
+        messageEl.textContent = 'It\'s a push!';
+    } 
    
 }
 
@@ -132,17 +141,19 @@ function stand() {
     DealerHandContainer.replaceWith(newHtml1);
     }
     dealerTotal =checkTotal(dealerHand);
+    playerTotal = checkTotal(playerHand);
+    console.log('dealer:'+dealerTotal);
+    console.log('player:'+ playerTotal)
     if (dealerTotal > 21) {
         win();
     } else if (dealerTotal === 21) {
         lose();
-    } else {
-        if (playerTotal > dealerTotal) {
-            win();
-        } else if (playerTotal === dealerTotal) {
-            push();
-        } else lose();
-    }
+    } else if (playerTotal > dealerTotal){
+        win();
+    } else if (playerTotal === dealerTotal) {
+        push();
+    } else lose();
+    
 }
 function hit(event) {
     const cardIdx = Math.floor(Math.random() * 52);
@@ -204,6 +215,7 @@ function win() {
   betVal.innerHTML = currentBet;
   chipsVal.innerHTML = `chips:${currentChips}`;
   disableButtons();
+  renderMessages('win');
 
 }
 function lose() {
@@ -211,6 +223,7 @@ function lose() {
   betVal.innerHTML = currentBet;
   chipsVal.innerHTML = `chips:${currentChips}`;
   disableButtons();
+  renderMessages('lose');
 }
 
 function push() {
@@ -219,6 +232,7 @@ function push() {
   betVal.innerHTML = currentBet;
   chipsVal.innerHTML = `chips:${currentChips}`;
   disableButtons();
+  renderMessages('push');
 }
 
 function disableButtons () {
