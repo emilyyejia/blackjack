@@ -20,7 +20,8 @@ const chipsVal= document.querySelector('#chips');
 document.querySelector('#bet').addEventListener('click',bet);
 document.querySelector('#hit').addEventListener('click',hit);
 document.querySelector('#stand').addEventListener('click',stand);
-document.querySelector('#play').addEventListener('click', init);
+document.querySelector('#deal').addEventListener('click', deal);
+document.querySelector('#continue').addEventListener('click', init);
 
 
 /*----- functions -----*/
@@ -36,26 +37,25 @@ function init() {
   dealerTotal = 0;
   winner = null;
   turn =playerHand;
+  //chipsVal.innerHTML = `chips:${currentChips}`;
   document.querySelector('#bet').disabled = false;
   document.querySelector('#hit').disabled = false;
   document.querySelector('#stand').disabled = false;
+  document.querySelector('#deal').disabled = false;
   clearBoard();
   render();
 
 }
 function render() {
     generateBoard();
-    //renderChips();
-    //renderControls();
-   //renderMessages();
+   renderMessages();
 }
-//function renderMessages() {
+
+function renderMessages() {
+    
    
-//}
+}
 
-//function getWinner() {
-
-//}
 function generateBoard() {
     for (let i = 0; i <4; i++) {
      for(let j = 0; j < VALUES.length; j++) {
@@ -92,11 +92,36 @@ function drawCard() {
         color: newCard.charAt(0)
        }; 
     return card; 
-  } 
+} 
+
+function deal() {
+    const playerCard1 = drawCard(); 
+    playerHand.push(playerCard1);
+    const playerHandContainer = document.querySelector("#player-" + playerHand.length);
+    const newHtml = document.createElement("div");
+    newHtml.id = "player-" + playerHand.length;
+    newHtml.className = `card large ${playerCard1.card} shadow`;
+    playerHandContainer.replaceWith(newHtml);
+    const playerCard2 = drawCard(); 
+    playerHand.push(playerCard2);
+    const playerHandContainer2 = document.querySelector("#player-" + playerHand.length);
+    const newHtml2 = document.createElement("div");
+    newHtml2.id = "player-" + playerHand.length;
+    newHtml2.className = `card large ${playerCard2.card} shadow`;
+    playerHandContainer2.replaceWith(newHtml2);
+    const dealerCard1 = drawCard();  
+    dealerHand.push(dealerCard1);
+    const DealerHandContainer = document.querySelector("#dealer-" + dealerHand.length);
+    const newHtml1 = document.createElement("div");
+    newHtml1.id = "dealer-" + dealerHand.length;
+    newHtml1.className = `card large ${dealerCard1.card} shadow`;
+    DealerHandContainer.replaceWith(newHtml1);
+    if(checkBlackjack(playerHand))
+        return 21;
+    }
 
 function stand() {
-    turn = dealerHand;
-    //dealerHand.push(drawCard()); 
+    turn = dealerHand; 
     while(checkTotal(dealerHand) < 17) {
     const card = drawCard();  
     dealerHand.push(card);
@@ -112,7 +137,7 @@ function stand() {
     } else if (dealerTotal === 21) {
         lose();
     } else {
-        if (playerTotal > dealerHand) {
+        if (playerTotal > dealerTotal) {
             win();
         } else if (playerTotal === dealerTotal) {
             push();
@@ -145,17 +170,20 @@ function checkBlackjack(hand) {
     if (hand.length < 3) {
         const cardAce = hand.find((card)=>{
             return card.number === 'A';
-           });
-           const cardQkj = hand.find((card)=>{
+        });
+        const cardQkj = hand.find((card)=>{
             return card.number === 'J'|| card.number === 'Q'|| card.number === 'K';
-           });
-           if (cardAce !== undefined && cardQkj !== undefined) {
-            return 21;}
+        });
+           
+        if (cardAce !== undefined && cardQkj !== undefined) {
+            return 21;
+        }
     }
     
 }
 function checkTotal (hand) {
-   checkBlackjack(hand);
+if(checkBlackjack(hand))
+    return 21;
     const total = hand.reduce((accumulator, card)=>{
        let number ;
        if (card.number === 'A') 
@@ -197,5 +225,6 @@ function disableButtons () {
     document.querySelector('#bet').disabled = true;
     document.querySelector('#hit').disabled = true;
     document.querySelector('#stand').disabled = true;
+    document.querySelector('#deal').disabled = true;
 
 }
