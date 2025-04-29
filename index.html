@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/cardstarter.css">
+    <script defer src="js/main.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Blackjack</h1>
+    
+    <div class="dealer-area">
+        <h2>Dealer's Hand</h2>
+        <div class="hand" id="dealer-hand">
+        <div class="container">
+            <div id="dealer-1" class="card large back-blue shadow"></div>
+            <div id="dealer-2" class="card large back-blue shadow"></div>
+            <div id="dealer-3" class="card large back-blue shadow"></div>
+            <div id="dealer-4" class="card large back-blue shadow"></div>
+            <div id="dealer-5" class="card large back-blue shadow"></div>
+            </div>
+     </div>
+    
+  
+    <div class="player-area">
+        <h2>Your Hand</h2>
+        <div class="hand" id="player-hand"></div>
+        <div class="container">
+            <div id="player-1" class="card large back-blue shadow"></div>
+            <div id="player-2" class="card large back-blue shadow"></div>
+            <div id="player-3" class="card large back-blue shadow"></div>
+            <div id="player-4" class="card large back-blue shadow"></div>
+            <div id="player-5" class="card large back-blue shadow"></div>
+          </div>
+    </div>
+  
+     <div class="controls">
+        <button id="bet">Bet</button>
+        <button id="stand">Stand</button>
+        <button id="hit">Hit</button>
+        <button id="play">Play</button>
+      </div>
+      <div id="chips">Chips: $100</div>
+      <div>Bet: <span id="betVal">0</span></div>
+      <div id="message"></div>
+      
+</body>
+</html>
