@@ -25,6 +25,7 @@ document.querySelector('#deal').addEventListener('click', deal);
 document.querySelector('#continue').addEventListener('click', init);
 
 
+
 /*----- functions -----*/
 init();
 // The init function is to initialize all state, then call render()
@@ -88,7 +89,7 @@ function bet(event) {
    currentChips -= 10;
    currentBet += 10;
    betVal.innerHTML = currentBet;
-   chipsVal.innerHTML = `chips:${currentChips}`;
+   chipsVal.innerHTML = `Chips:${currentChips}`;
   } else alert("No enough funds!")
 }
 
@@ -127,6 +128,8 @@ function deal() {
     DealerHandContainer.replaceWith(newHtml1);
     if(checkBlackjack(playerHand))
         return 21;
+    document.querySelector('#bet').disabled = true;
+    document.querySelector('#deal').disabled = true;
     }
 
 function stand() {
