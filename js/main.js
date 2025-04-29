@@ -141,17 +141,21 @@ function hit(event) {
         win();
     } 
 }
-
+function checkBlackjack(hand) {
+    if (hand.length < 3) {
+        const cardAce = hand.find((card)=>{
+            return card.number === 'A';
+           });
+           const cardQkj = hand.find((card)=>{
+            return card.number === 'J'|| card.number === 'Q'|| card.number === 'K';
+           });
+           if (cardAce !== undefined && cardQkj !== undefined) {
+            return 21;}
+    }
+    
+}
 function checkTotal (hand) {
-   const cardAce = hand.find((card)=>{
-    return card.number === 'A';
-   });
-   const cardQkj = hand.find((card)=>{
-    return card.number === 'J'|| card.number === 'Q'|| card.number === 'K';
-   });
-   if (cardAce != undefined && cardQkj != undefined) {
-    return 21;
-   } else {
+   checkBlackjack(hand);
     const total = hand.reduce((accumulator, card)=>{
        let number ;
        if (card.number === 'A') 
@@ -163,7 +167,7 @@ function checkTotal (hand) {
        return accumulator + number;
     },0);
     return total;
-   }
+   
 }
 
 function win() {
