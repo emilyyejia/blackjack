@@ -17,6 +17,7 @@ let currentChips = 100;
 const betVal = document.querySelector('#betVal');
 const chipsVal= document.querySelector('#chips');
 const messageEl = document.querySelector('#message');
+
 /*----- event listeners -----*/
 document.querySelector('#bet').addEventListener('click',bet);
 document.querySelector('#hit').addEventListener('click',hit);
@@ -24,21 +25,19 @@ document.querySelector('#stand').addEventListener('click',stand);
 document.querySelector('#deal').addEventListener('click', deal);
 document.querySelector('#continue').addEventListener('click', init);
 
-
-
 /*----- functions -----*/
 init();
 // The init function is to initialize all state, then call render()
 function init() {
-  currentBet = 0;
-  board = [];
-  playerHand = [];
-  dealerHand =[];
-  playerTotal = 0;
-  dealerTotal = 0;
-  winner = null;
-  turn =playerHand;
-  render();
+    currentBet = 0;
+    board = [];
+    playerHand = [];
+    dealerHand =[];
+    playerTotal = 0;
+    dealerTotal = 0;
+    winner = null;
+    turn =playerHand;
+    render();
 }
 function render() {
     generateBoard();
@@ -49,10 +48,9 @@ function render() {
 function renderControls() {
     messageEl.textContent = '';
     document.querySelector('#bet').disabled = false;
-    document.querySelector('#hit').disabled = false;
-    document.querySelector('#stand').disabled = false;
+    document.querySelector('#hit').disabled = true;
+    document.querySelector('#stand').disabled = true;
     document.querySelector('#deal').disabled = false;
-  
 
 }
 function renderMessages(result) {
@@ -74,23 +72,49 @@ function generateBoard() {
     }
  }
 function clearBoard() {
-    for(let i = 1; i <= 5; i++){
+    for(let i = 1; i <= 6; i++){
         const dealerCard = document.getElementById(`dealer-${i}`);
         dealerCard.className = "card large back-blue shadow";
     }
-    for(let i = 1; i <= 5; i++){
+    for(let i = 1; i <= 6; i++){
         const playerCard = document.getElementById(`player-${i}`);
         playerCard.className = "card large back-blue shadow";
     }
 
 }
+
+function disableButtons () {
+    document.querySelector('#bet').disabled = true;
+    document.querySelector('#hit').disabled = true;
+    document.querySelector('#stand').disabled = true;
+    document.querySelector('#deal').disabled = true;
+
+}
+
+function resetGame() {
+    currentBet = 0;
+    currentChips = 100;
+    board = [];
+    playerHand = [];
+    dealerHand =[];
+    playerTotal = 0;
+    dealerTotal = 0;
+    winner = null;
+    turn =playerHand;
+    betVal.innerHTML = currentBet;
+    chipsVal.innerHTML = `Chips:${currentChips}`;
+    render();
+}
+
 function bet(event) {
-  if(currentChips >= 10){
-   currentChips -= 10;
-   currentBet += 10;
-   betVal.innerHTML = currentBet;
-   chipsVal.innerHTML = `Chips:${currentChips}`;
-  } else alert("No enough funds!")
+    if(currentChips >= 10){
+       currentChips -= 10;
+       currentBet += 10;
+       betVal.innerHTML = currentBet;
+       chipsVal.innerHTML = `Chips:${currentChips}`;
+    } else {
+        alert("Not enough funds!")
+    }
 }
 
 function drawCard() {
@@ -100,7 +124,7 @@ function drawCard() {
         card:newCard,
         number: newCard.slice(1),
         color: newCard.charAt(0)
-       }; 
+    }; 
     return card; 
 } 
 
@@ -130,18 +154,20 @@ function deal() {
         return 21;
     document.querySelector('#bet').disabled = true;
     document.querySelector('#deal').disabled = true;
+    document.querySelector('#hit').disabled = false;
+    document.querySelector('#stand').disabled = false;
     }
 
 function stand() {
     turn = dealerHand; 
     while(checkTotal(dealerHand) < 17) {
-    const card = drawCard();  
-    dealerHand.push(card);
-    const DealerHandContainer = document.querySelector("#dealer-" + dealerHand.length);
-    const newHtml1 = document.createElement("div");
-    newHtml1.id = "dealer-" + dealerHand.length;
-    newHtml1.className = `card large ${card.card} shadow`;
-    DealerHandContainer.replaceWith(newHtml1);
+        const card = drawCard();  
+        dealerHand.push(card);
+        const DealerHandContainer = document.querySelector("#dealer-" + dealerHand.length);
+        const newHtml1 = document.createElement("div");
+        newHtml1.id = "dealer-" + dealerHand.length;
+        newHtml1.className = `card large ${card.card} shadow`;
+        DealerHandContainer.replaceWith(newHtml1);
     }
     dealerTotal =checkTotal(dealerHand);
     playerTotal = checkTotal(playerHand);
@@ -156,6 +182,10 @@ function stand() {
     } else if (playerTotal === dealerTotal) {
         push();
     } else lose();
+    if(currentChips <= 0) {
+        alert("Out of chip! You will start a new game.");
+        resetGame();
+    }
     
 }
 function hit(event) {
@@ -196,8 +226,7 @@ function checkBlackjack(hand) {
     
 }
 function checkTotal (hand) {
-if(checkBlackjack(hand))
-    return 21;
+    if(checkBlackjack(hand)) return 21;
     const total = hand.reduce((accumulator, card)=>{
        let number ;
        if (card.number === 'A') 
@@ -209,39 +238,30 @@ if(checkBlackjack(hand))
        return accumulator + number;
     },0);
     return total;
-   
 }
 
 function win() {
-  currentChips=currentChips+currentBet*2;
-  currentBet = 0;
-  betVal.innerHTML = currentBet;
-  chipsVal.innerHTML = `chips:${currentChips}`;
-  disableButtons();
-  renderMessages('win');
-
+    currentChips=currentChips+currentBet*2;
+    currentBet = 0;
+    betVal.innerHTML = currentBet;
+    chipsVal.innerHTML = `chips:${currentChips}`;
+    disableButtons();
+    renderMessages('win');
 }
+
 function lose() {
-  currentBet = 0;
-  betVal.innerHTML = currentBet;
-  chipsVal.innerHTML = `chips:${currentChips}`;
-  disableButtons();
-  renderMessages('lose');
+    currentBet = 0;
+    betVal.innerHTML = currentBet;
+    chipsVal.innerHTML = `chips:${currentChips}`;
+    disableButtons();
+    renderMessages('lose');
 }
 
 function push() {
-  currentChips = currentChips + currentBet;
-  currentBet = 0;
-  betVal.innerHTML = currentBet;
-  chipsVal.innerHTML = `chips:${currentChips}`;
-  disableButtons();
-  renderMessages('push');
-}
-
-function disableButtons () {
-    document.querySelector('#bet').disabled = true;
-    document.querySelector('#hit').disabled = true;
-    document.querySelector('#stand').disabled = true;
-    document.querySelector('#deal').disabled = true;
-
+    currentChips = currentChips + currentBet;
+    currentBet = 0;
+    betVal.innerHTML = currentBet;
+    chipsVal.innerHTML = `chips:${currentChips}`;
+    disableButtons();
+    renderMessages('push');
 }
