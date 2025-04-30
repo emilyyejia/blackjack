@@ -38,10 +38,11 @@
     font-size: 3vmin;
     letter-spacing: 1vmin;
   }
-
-  
+ 
   .card {
     margin: 3vh;
+    width: 4.0em;
+    height: 5.5em;
   
   }
   
@@ -63,14 +64,39 @@
   }
 
 #chips {
-  color: black;
+  color: white;
   font-size: 1.5vmin; 
   font-weight: bold; 
   line-height: 32px;
 }
 #bets {
-  color: black;
+  color: white;
   font-size: 1.5vmin; 
   font-weight: bold; 
   line-height: 20px;
+}
+
+@media(max-width: 480px){
+  body {
+    background-color: #8a719c;
+  }
+  .card {
+    width: 2.8em;
+    height: 3.8em;
+ }
+ #chips {
+  font-size: 3.5vw;
+  line-height: 24px; 
+}
+#bets {
+  font-size: 3.5vw;
+  line-height: 18px;
+}
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 0.5em;
+    justify-content: center;
+ }
+ 
 }
