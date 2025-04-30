@@ -134,21 +134,21 @@ function deal() {
     const playerHandContainer = document.querySelector("#player-" + playerHand.length);
     const newHtml = document.createElement("div");
     newHtml.id = "player-" + playerHand.length;
-    newHtml.className = `card large ${playerCard1.card} shadow`;
+    newHtml.className = `card large ${playerCard1.card} shadow animate__animated animate__flipInY`;
     playerHandContainer.replaceWith(newHtml);
     const playerCard2 = drawCard(); 
     playerHand.push(playerCard2);
     const playerHandContainer2 = document.querySelector("#player-" + playerHand.length);
     const newHtml2 = document.createElement("div");
     newHtml2.id = "player-" + playerHand.length;
-    newHtml2.className = `card large ${playerCard2.card} shadow`;
+    newHtml2.className = `card large ${playerCard2.card} shadow animate__animated animate__flipInY`;
     playerHandContainer2.replaceWith(newHtml2);
     const dealerCard1 = drawCard();  
     dealerHand.push(dealerCard1);
     const DealerHandContainer = document.querySelector("#dealer-" + dealerHand.length);
     const newHtml1 = document.createElement("div");
     newHtml1.id = "dealer-" + dealerHand.length;
-    newHtml1.className = `card large ${dealerCard1.card} shadow`;
+    newHtml1.className = `card large ${dealerCard1.card} shadow animate__animated animate__flipInY`;
     DealerHandContainer.replaceWith(newHtml1);
     if(checkBlackjack(playerHand))
         return 21;
@@ -166,7 +166,7 @@ function stand() {
         const DealerHandContainer = document.querySelector("#dealer-" + dealerHand.length);
         const newHtml1 = document.createElement("div");
         newHtml1.id = "dealer-" + dealerHand.length;
-        newHtml1.className = `card large ${card.card} shadow`;
+        newHtml1.className = `card large ${card.card} shadow animate__animated animate__flipInY`;
         DealerHandContainer.replaceWith(newHtml1);
     }
     dealerTotal =checkTotal(dealerHand);
@@ -200,7 +200,7 @@ function hit(event) {
     const playerHandContainer = document.querySelector("#player-" + playerHand.length);
     const newHtml = document.createElement("div");
     newHtml.id = "player-" + playerHand.length;
-    newHtml.className = `card large ${card.card} shadow`;
+    newHtml.className = `card large ${card.card} shadow animate__animated animate__flipInY`;
     playerHandContainer.replaceWith(newHtml);
     playerTotal = checkTotal(playerHand);
     if (playerTotal > 21) {
