@@ -38,16 +38,11 @@
     font-size: 3vmin;
     letter-spacing: 1vmin;
   }
-  
-  .container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
+
   
   .card {
     margin: 3vh;
+  
   }
   
   .card.outline {
