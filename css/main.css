@@ -94,5 +94,7 @@ h2 {
 button {
   margin-top: 0;
 }
-
+.controls {
+  color: black;
+}
 }

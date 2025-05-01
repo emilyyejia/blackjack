@@ -53,14 +53,20 @@ function renderControls() {
     document.querySelector('#deal').disabled = false;
 
 }
-function renderMessages(result) {
-    if (result === 'win'){
+function renderMessages(info) {
+    if (info === 'win'){
         messageEl.textContent = 'You win!';
-    } else if (result === 'lose') {
+    } else if (info === 'lose') {
         messageEl.textContent = 'You lose!';
-    } else if (result === 'push') {
+    } else if (info === 'push') {
         messageEl.textContent = 'It\'s a push!';
-    } 
+    } else if (info === 'shuffled') {
+        messageEl.textContent = 'Shuffled! New game!'
+    } else if (info === 'fund') {
+        messageEl.textContent = 'Not enough funds!'
+    } else if (info === 'bet')  {
+        messageEl.textContent = 'Place a bet!'
+    }
    
 }
 
@@ -106,14 +112,14 @@ function resetGame() {
     render();
 }
 
-function bet(event) {
+function bet() {
     if(currentChips >= 10){
        currentChips -= 10;
        currentBet += 10;
        betVal.innerHTML = currentBet;
        chipsVal.innerHTML = `Chips:${currentChips}`;
     } else {
-        alert("Not enough funds!")
+        renderMessages('fund');
     }
 }
 
@@ -150,8 +156,10 @@ function deal() {
     newHtml1.id = "dealer-" + dealerHand.length;
     newHtml1.className = `card large ${dealerCard1.card} shadow animate__animated animate__flipInY`;
     DealerHandContainer.replaceWith(newHtml1);
-    if(checkBlackjack(playerHand))
-        return 21;
+    if(checkBlackjack(playerHand)) {
+        win();
+    }
+        
     document.querySelector('#bet').disabled = true;
     document.querySelector('#deal').disabled = true;
     document.querySelector('#hit').disabled = false;
@@ -182,9 +190,13 @@ function stand() {
     } else if (playerTotal === dealerTotal) {
         push();
     } else lose();
-    if(currentChips <= 0) {
-        alert("Out of chip! You will start a new game.");
-        resetGame();
+    if(currentChips === 0) {
+        setTimeout(() => {
+            renderMessages('shuffled');
+        }, 2000);
+        setTimeout(() => {
+            resetGame();
+        }, 3000);
     }
     
 }
