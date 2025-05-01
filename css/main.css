@@ -1,68 +1,50 @@
 * {
     box-sizing: border-box;
-  }
-  body {
+}
+body {
     background-color: #8a719c;
     color: white;
     font-family: Arial, sans-serif;
     text-align: center;
-  }
+}
   
-  #game-board {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    background-color: #4f3854;
-    border-radius: 10px;
-    box-shadow: 0 0 20px black;
-  }
-  #message {
+#message {
     color: yellow;
     font-size: 2vmin; 
     font-weight: bold; 
-  }
+}
   
-  .hand {
+.hand {
     display: flex;
     justify-content: center;
-    margin: 10px;
-  }
-  header {
+}
+header {
     font-size: 4vmin;
     color: darkgrey;
     letter-spacing: 1vmin;
-  }
+}
   
-  h1 {
+h1 {
     color: black;
     font-size: 3vmin;
     letter-spacing: 1vmin;
-  }
+}
  
-  .card {
+.card {
     margin: 3vh;
     width: 4.0em;
     height: 5.5em;
   
-  }
+}
   
-  .card.outline {
+.card.outline {
     border: 0.15em dashed #202d7a;
-  }
+}
   
-  .card.shadow {
+.card.shadow {
     box-shadow: 7px 7px 7px 0 rgba(41, 41, 41, 0.95) !important;
-  }
+}
   
-  .button {
-    margin-top: 4vmin;
-    padding: 2vmin;
-    font-size: 2vmin;
-    border-radius: 4vmin;
-    border: 0.1vmin solid grey;
-    color: grey;
-  }
-
 #chips {
   color: white;
   font-size: 1.5vmin; 
@@ -80,9 +62,10 @@
   body {
     background-color: #8a719c;
   }
+
   .card {
-    width: 2.8em;
-    height: 3.8em;
+    width: 2.6em;
+    height: 3.6em;
  }
  #chips {
   font-size: 3.5vw;
@@ -98,5 +81,18 @@
     gap: 0.5em;
     justify-content: center;
  }
- 
+ #message {
+  color: yellow;
+  font-size: 4vmin; 
+  font-weight: bold; 
+}
+h2 {
+  color: black;
+  font-size: 3vmin;
+  letter-spacing: 1vmin;
+}
+button {
+  margin-top: 0;
+}
+
 }
