@@ -32,14 +32,13 @@ Blackjack is a classic casino card game where players compete against the dealer
 
 ## Technologies Used
 
-<img src="https://img.shields.io/badge/-JavaScript-05122A?style=flat&logo=javascript" alt="javascript badge"> 
-<img src="https://img.shields.io/badge/-HTML5-05122A?style=flat&logo=html5" alt="html badge"> 
-<img src="https://img.shields.io/badge/-CSS-05122A?style=flat&logo=css3" alt="css badge"> 
-<img src="https://img.shields.io/badge/-Git-05122A?style=flat&logo=git" alt="git badge"> 
-<img src="https://img.shields.io/badge/-GitHub-05122A?style=flat&logo=github" alt="github badge"> 
-<img src="https://img.shields.io/badge/-VS_Code-05122A?style=flat&logo=visualstudio" alt="visual studio badge"> 
-<img src="https://img.shields.io/badge/-Markdown-05122A?style=flat&logo=markdown" alt="markdown badge"> 
-
+  ![JavaScript](https://img.shields.io/badge/-JavaScript-05122A?style=flat&logo=javascript)
+  ![HTML5](https://img.shields.io/badge/-HTML5-05122A?style=flat&logo=html5)
+  ![CSS3](https://img.shields.io/badge/-CSS-05122A?style=flat&logo=css3)
+  ![Markdown](https://img.shields.io/badge/-Markdown-05122A?style=flat&logo=markdown)
+  ![Git](https://img.shields.io/badge/-Git-05122A?style=flat&logo=git)
+  ![Github](https://img.shields.io/badge/-GitHub-05122A?style=flat&logo=github)
+  ![VSCode](https://img.shields.io/badge/-VS_Code-05122A?style=flat&logo=visualstudio)
 
 ## Getting Started
 
@@ -57,10 +56,10 @@ Blackjack is a classic casino card game where players compete against the dealer
 
 ### Link
 
-Deployed Link （https://emilyyejia.github.io/blackjack/）
+- Deployed Link （https://emilyyejia.github.io/blackjack/）
 
 ## Upcoming Features
 
-- [:x:] Add sound effects for actions like shuffling, dealing cards, and winning or losing a round.
-- [:x:] Introduce difficulty levels for the dealer's AI, making the game more challenging with more strategic plays.
+- Add sound effects for actions like shuffling, dealing cards, and winning or losing a round.
+- Introduce difficulty levels for the dealer's AI, making the game more challenging with more strategic plays.
 
