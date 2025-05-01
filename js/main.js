@@ -14,16 +14,12 @@ let currentChips;
 const betVal = document.querySelector('#betVal');
 const chipsVal= document.querySelector('#chips');
 const messageEl = document.querySelector('#message');
-const betEl = document.querySelector('#place-bet');
 
 document.querySelector('#bet').addEventListener('click',bet);
 document.querySelector('#hit').addEventListener('click',hit);
 document.querySelector('#stand').addEventListener('click',stand);
 document.querySelector('#deal').addEventListener('click', deal);
 document.querySelector('#continue').addEventListener('click', continueGame);
-window.addEventListener('DOMContentLoaded',function() {
-    renderMessages('bet')
-});
 
 init();
 
@@ -51,10 +47,7 @@ function continueGame() {
     dealerTotal = 0;
     winner = null;
     turn =playerHand;
-    generateBoard();
-    clearBoard();
-    renderMessages('bet');
-    renderControls();
+    render();
 }
 
 function render() {
@@ -94,9 +87,7 @@ function renderMessages(info) {
         messageEl.textContent = 'Out of chips! Shuffling the deck... '
     } else if (info === 'fund') {
         messageEl.textContent = 'Not enough funds!'
-    } else if (info === 'bet')  {
-        betEl.textContent = 'Start by placing a bet!'
-    }  
+    } 
 }
 
 function renderControls() {
@@ -104,7 +95,7 @@ function renderControls() {
     document.querySelector('#bet').disabled = false;
     document.querySelector('#hit').disabled = true;
     document.querySelector('#stand').disabled = true;
-    document.querySelector('#deal').disabled = false;
+    document.querySelector('#deal').disabled = true;
 }
 
 function disableButtons () {
@@ -120,10 +111,10 @@ function bet() {
        currentBet += 10;
        betVal.innerHTML = currentBet;
        chipsVal.innerHTML = `Chips:${currentChips}`;
-       betEl.textContent = '';
     } else {
         renderMessages('fund');
     }
+    document.querySelector('#deal').disabled = false;
 }
 
 function drawCard() {
@@ -245,7 +236,7 @@ function win() {
     currentChips=currentChips+currentBet*2;
     currentBet = 0;
     betVal.innerHTML = currentBet;
-    chipsVal.innerHTML = `chips:${currentChips}`;
+    chipsVal.innerHTML = `Chips:${currentChips}`;
     disableButtons();
     renderMessages('win');
 }
@@ -253,7 +244,7 @@ function win() {
 function lose() {
     currentBet = 0;
     betVal.innerHTML = currentBet;
-    chipsVal.innerHTML = `chips:${currentChips}`;
+    chipsVal.innerHTML = `Chips:${currentChips}`;
     disableButtons();
     renderMessages('lose');
 }
@@ -262,7 +253,7 @@ function push() {
     currentChips = currentChips + currentBet;
     currentBet = 0;
     betVal.innerHTML = currentBet;
-    chipsVal.innerHTML = `chips:${currentChips}`;
+    chipsVal.innerHTML = `Chips:${currentChips}`;
     disableButtons();
     renderMessages('push');
 }

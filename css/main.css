@@ -47,7 +47,7 @@ h2 {
 }
 #place-bet {
   color: yellow;
-  font-size: 1.8vmin; 
+  font-size: 1.5vmin; 
   font-weight: bold; 
   line-height: 20px;
   margin-top: 10px;
@@ -62,11 +62,15 @@ h2 {
     height: 3.6em;
  }
  #chips {
-  font-size: 3.5vw;
+  font-size: 3vw;
   line-height: 24px; 
  }
+ #place-bet {
+  font-size: 3vw;
+  line-height: 18px;
+ }
 #bets {
-  font-size: 3.5vw;
+  font-size: 3vw;
   line-height: 18px;
  }
 .container {
