@@ -1,8 +1,6 @@
-/*----- constants -----*/
 const COLORS = ['d','h','s','c'];
 const VALUES = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
  
-/*----- state variables -----*/
 let board;
 let playerHand;
 let dealerHand;
@@ -13,21 +11,18 @@ let playerTotal;
 let dealerTotal;
 let currentChips = 100;
 
-/*----- cached elements  -----*/
 const betVal = document.querySelector('#betVal');
 const chipsVal= document.querySelector('#chips');
 const messageEl = document.querySelector('#message');
 
-/*----- event listeners -----*/
 document.querySelector('#bet').addEventListener('click',bet);
 document.querySelector('#hit').addEventListener('click',hit);
 document.querySelector('#stand').addEventListener('click',stand);
 document.querySelector('#deal').addEventListener('click', deal);
 document.querySelector('#continue').addEventListener('click', init);
 
-/*----- functions -----*/
 init();
-// The init function is to initialize all state, then call render()
+
 function init() {
     currentBet = 0;
     board = [];
@@ -39,35 +34,12 @@ function init() {
     turn =playerHand;
     render();
 }
+
 function render() {
     generateBoard();
     clearBoard();
     renderMessages();
     renderControls();
-}
-function renderControls() {
-    messageEl.textContent = '';
-    document.querySelector('#bet').disabled = false;
-    document.querySelector('#hit').disabled = true;
-    document.querySelector('#stand').disabled = true;
-    document.querySelector('#deal').disabled = false;
-
-}
-function renderMessages(info) {
-    if (info === 'win'){
-        messageEl.textContent = 'You win!';
-    } else if (info === 'lose') {
-        messageEl.textContent = 'You lose!';
-    } else if (info === 'push') {
-        messageEl.textContent = 'It\'s a push!';
-    } else if (info === 'shuffled') {
-        messageEl.textContent = 'Shuffled! New game!'
-    } else if (info === 'fund') {
-        messageEl.textContent = 'Not enough funds!'
-    } else if (info === 'bet')  {
-        messageEl.textContent = 'Place a bet!'
-    }
-   
 }
 
 function generateBoard() {
@@ -77,6 +49,7 @@ function generateBoard() {
      }
     }
  }
+
 function clearBoard() {
     for(let i = 1; i <= 6; i++){
         const dealerCard = document.getElementById(`dealer-${i}`);
@@ -86,7 +59,30 @@ function clearBoard() {
         const playerCard = document.getElementById(`player-${i}`);
         playerCard.className = "card large back-blue shadow";
     }
+}
 
+function renderMessages(info) {
+    if (info === 'win'){
+        messageEl.textContent = 'You win!';
+    } else if (info === 'lose') {
+        messageEl.textContent = 'You lose!';
+    } else if (info === 'push') {
+        messageEl.textContent = 'It\'s a push!';
+    } else if (info === 'shuffled') {
+        messageEl.textContent = 'Out of chips! Shuffling the deck... '
+    } else if (info === 'fund') {
+        messageEl.textContent = 'Not enough funds!'
+    } else if (info === 'bet')  {
+        messageEl.textContent = 'Place a bet!'
+    }  
+}
+
+function renderControls() {
+    messageEl.textContent = '';
+    document.querySelector('#bet').disabled = false;
+    document.querySelector('#hit').disabled = true;
+    document.querySelector('#stand').disabled = true;
+    document.querySelector('#deal').disabled = false;
 }
 
 function disableButtons () {
@@ -94,7 +90,6 @@ function disableButtons () {
     document.querySelector('#hit').disabled = true;
     document.querySelector('#stand').disabled = true;
     document.querySelector('#deal').disabled = true;
-
 }
 
 function resetGame() {
@@ -133,33 +128,27 @@ function drawCard() {
     }; 
     return card; 
 } 
+function renderCard(card, role, roleNum) {
+    const playerHandContainer = document.querySelector(`#${role}-${roleNum}`);
+    const newHtml = document.createElement("div");
+    newHtml.id = `${role}-${roleNum}`;
+    newHtml.className = `card large ${card.card} shadow animate__animated animate__flipInY`;
+    playerHandContainer.replaceWith(newHtml);
+}
 
 function deal() {
     const playerCard1 = drawCard(); 
     playerHand.push(playerCard1);
-    const playerHandContainer = document.querySelector("#player-" + playerHand.length);
-    const newHtml = document.createElement("div");
-    newHtml.id = "player-" + playerHand.length;
-    newHtml.className = `card large ${playerCard1.card} shadow animate__animated animate__flipInY`;
-    playerHandContainer.replaceWith(newHtml);
+    renderCard(playerCard1,'player', playerHand.length);
     const playerCard2 = drawCard(); 
     playerHand.push(playerCard2);
-    const playerHandContainer2 = document.querySelector("#player-" + playerHand.length);
-    const newHtml2 = document.createElement("div");
-    newHtml2.id = "player-" + playerHand.length;
-    newHtml2.className = `card large ${playerCard2.card} shadow animate__animated animate__flipInY`;
-    playerHandContainer2.replaceWith(newHtml2);
+    renderCard(playerCard2,'player', playerHand.length);
     const dealerCard1 = drawCard();  
     dealerHand.push(dealerCard1);
-    const DealerHandContainer = document.querySelector("#dealer-" + dealerHand.length);
-    const newHtml1 = document.createElement("div");
-    newHtml1.id = "dealer-" + dealerHand.length;
-    newHtml1.className = `card large ${dealerCard1.card} shadow animate__animated animate__flipInY`;
-    DealerHandContainer.replaceWith(newHtml1);
+    renderCard(dealerCard1,'dealer', dealerHand.length);
     if(checkBlackjack(playerHand)) {
         win();
-    }
-        
+    }    
     document.querySelector('#bet').disabled = true;
     document.querySelector('#deal').disabled = true;
     document.querySelector('#hit').disabled = false;
@@ -171,11 +160,7 @@ function stand() {
     while(checkTotal(dealerHand) < 17) {
         const card = drawCard();  
         dealerHand.push(card);
-        const DealerHandContainer = document.querySelector("#dealer-" + dealerHand.length);
-        const newHtml1 = document.createElement("div");
-        newHtml1.id = "dealer-" + dealerHand.length;
-        newHtml1.className = `card large ${card.card} shadow animate__animated animate__flipInY`;
-        DealerHandContainer.replaceWith(newHtml1);
+        renderCard(card, 'dealer', dealerHand.length);
     }
     dealerTotal =checkTotal(dealerHand);
     playerTotal = checkTotal(playerHand);
@@ -209,11 +194,7 @@ function hit(event) {
      color: newCard.charAt(0)
     }; 
     playerHand.push(card);
-    const playerHandContainer = document.querySelector("#player-" + playerHand.length);
-    const newHtml = document.createElement("div");
-    newHtml.id = "player-" + playerHand.length;
-    newHtml.className = `card large ${card.card} shadow animate__animated animate__flipInY`;
-    playerHandContainer.replaceWith(newHtml);
+    renderCard(card, 'player', playerHand.length);
     playerTotal = checkTotal(playerHand);
     if (playerTotal > 21) {
         lose();
