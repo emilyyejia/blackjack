@@ -9,21 +9,40 @@ let turn;
 let winner;
 let playerTotal;
 let dealerTotal;
-let currentChips = 100;
+let currentChips;
 
 const betVal = document.querySelector('#betVal');
 const chipsVal= document.querySelector('#chips');
 const messageEl = document.querySelector('#message');
+const betEl = document.querySelector('#place-bet');
 
 document.querySelector('#bet').addEventListener('click',bet);
 document.querySelector('#hit').addEventListener('click',hit);
 document.querySelector('#stand').addEventListener('click',stand);
 document.querySelector('#deal').addEventListener('click', deal);
-document.querySelector('#continue').addEventListener('click', init);
+document.querySelector('#continue').addEventListener('click', continueGame);
+window.addEventListener('DOMContentLoaded',function() {
+    renderMessages('bet')
+});
 
 init();
 
 function init() {
+    currentBet = 0;
+    currentChips = 100;
+    board = [];
+    playerHand = [];
+    dealerHand =[];
+    playerTotal = 0;
+    dealerTotal = 0;
+    winner = null;
+    turn =playerHand;
+    betVal.innerHTML = currentBet;
+    chipsVal.innerHTML = `Chips:${currentChips}`;
+    render();
+}
+
+function continueGame() {
     currentBet = 0;
     board = [];
     playerHand = [];
@@ -32,7 +51,10 @@ function init() {
     dealerTotal = 0;
     winner = null;
     turn =playerHand;
-    render();
+    generateBoard();
+    clearBoard();
+    renderMessages('bet');
+    renderControls();
 }
 
 function render() {
@@ -73,7 +95,7 @@ function renderMessages(info) {
     } else if (info === 'fund') {
         messageEl.textContent = 'Not enough funds!'
     } else if (info === 'bet')  {
-        messageEl.textContent = 'Place a bet!'
+        betEl.textContent = 'Start by placing a bet!'
     }  
 }
 
@@ -92,27 +114,13 @@ function disableButtons () {
     document.querySelector('#deal').disabled = true;
 }
 
-function resetGame() {
-    currentBet = 0;
-    currentChips = 100;
-    board = [];
-    playerHand = [];
-    dealerHand =[];
-    playerTotal = 0;
-    dealerTotal = 0;
-    winner = null;
-    turn =playerHand;
-    betVal.innerHTML = currentBet;
-    chipsVal.innerHTML = `Chips:${currentChips}`;
-    render();
-}
-
 function bet() {
     if(currentChips >= 10){
        currentChips -= 10;
        currentBet += 10;
        betVal.innerHTML = currentBet;
        chipsVal.innerHTML = `Chips:${currentChips}`;
+       betEl.textContent = '';
     } else {
         renderMessages('fund');
     }
@@ -179,7 +187,7 @@ function stand() {
             renderMessages('shuffled');
         }, 2000);
         setTimeout(() => {
-            resetGame();
+            init();
         }, 3000);
     } 
 }

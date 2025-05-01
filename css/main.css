@@ -8,8 +8,8 @@ body {
     text-align: center;
 }
 #message {
-    color: #e0eb85;
-    font-size: 3vmin; 
+    color: yellow;
+    font-size: 2vmin; 
     font-weight: bold; 
 }  
 .hand {
@@ -38,18 +38,21 @@ h2 {
 .card.shadow {
     box-shadow: 7px 7px 7px 0 rgba(41, 41, 41, 0.95) !important;
 }
-#chips {
-  color: white;
-  font-size: 1.5vmin; 
-  font-weight: bold; 
-  line-height: 32px;
-}
-#bets {
+
+.display {
   color: white;
   font-size: 1.5vmin; 
   font-weight: bold; 
   line-height: 20px;
 }
+#place-bet {
+  color: yellow;
+  font-size: 1.8vmin; 
+  font-weight: bold; 
+  line-height: 20px;
+  margin-top: 10px;
+}
+
 @media(max-width: 480px){
  body {
     background-color: #064420;
