@@ -15,14 +15,12 @@
 Blackjack is a classic casino card game where players compete against the dealer to get a hand total closest to 21 without going over. You must decide when to "hit" for more cards or "stand" to keep your current hand, all while trying to beat the dealer's total.
 
 ## How to win
-- You hit 21 with your first two cards (an Ace and a 10-value card) — this is a Blackjack, and usually wins instantly unless the dealer also has Blackjack.
+- Having a hand total higher than the dealer’s (without going over 21).
 
-- Your hand value is higher than the dealer’s without going over 21.
+- Dealer busts (goes over 21), and you didn’t.
 
-- The dealer busts (goes over 21) and your hand is 21 or less.
-
-- You stand with a strong hand, and the dealer draws cards that total less than yours.
-
+- You get a blackjack (an Ace + a 10-value card) and the dealer doesn’t.
+This is the best hand.
 
 ## Screenshot
 | Screenshots| Description |
