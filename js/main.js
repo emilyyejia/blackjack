@@ -128,6 +128,7 @@ function drawCard() {
     }; 
     return card; 
 } 
+
 function renderCard(card, role, roleNum) {
     const playerHandContainer = document.querySelector(`#${role}-${roleNum}`);
     const newHtml = document.createElement("div");
@@ -164,8 +165,6 @@ function stand() {
     }
     dealerTotal =checkTotal(dealerHand);
     playerTotal = checkTotal(playerHand);
-    console.log('dealer:'+dealerTotal);
-    console.log('player:'+ playerTotal)
     if (dealerTotal > 21) {
         win();
     } else if (dealerTotal === 21) {
@@ -182,9 +181,9 @@ function stand() {
         setTimeout(() => {
             resetGame();
         }, 3000);
-    }
-    
+    } 
 }
+
 function hit(event) {
     const cardIdx = Math.floor(Math.random() * 52);
     const newCard = board[cardIdx];
@@ -203,6 +202,7 @@ function hit(event) {
         win();
     } 
 }
+
 function checkBlackjack(hand) {
     if (hand.length < 3) {
         const cardAce = hand.find((card)=>{
@@ -215,9 +215,9 @@ function checkBlackjack(hand) {
         if (cardAce !== undefined && cardQkj !== undefined) {
             return 21;
         }
-    }
-    
+    }   
 }
+
 function checkTotal (hand) {
     if(checkBlackjack(hand)) return 21;
     const total = hand.reduce((accumulator, card)=>{

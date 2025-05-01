@@ -2,49 +2,42 @@
     box-sizing: border-box;
 }
 body {
-    background-color: #8a719c;
+    background-color: #064420;
     color: white;
     font-family: Arial, sans-serif;
     text-align: center;
 }
-  
 #message {
-    color: yellow;
-    font-size: 2vmin; 
+    color: #e0eb85;
+    font-size: 3vmin; 
     font-weight: bold; 
-}
-  
+}  
 .hand {
     display: flex;
     justify-content: center;
 }
-header {
-    font-size: 4vmin;
-    color: darkgrey;
-    letter-spacing: 1vmin;
-}
-  
+
 h1 {
-    color: black;
-    font-size: 3vmin;
+    color: white;
+    font-size: 4vmin;
     letter-spacing: 1vmin;
 }
- 
+
+h2 {
+    color: white;
+    font-size: 2vmin;
+}
 .card {
     margin: 3vh;
     width: 4.0em;
-    height: 5.5em;
-  
-}
-  
+    height: 5.5em;  
+}  
 .card.outline {
     border: 0.15em dashed #202d7a;
-}
-  
+}  
 .card.shadow {
     box-shadow: 7px 7px 7px 0 rgba(41, 41, 41, 0.95) !important;
 }
-
 #chips {
   color: white;
   font-size: 1.5vmin; 
@@ -57,12 +50,10 @@ h1 {
   font-weight: bold; 
   line-height: 20px;
 }
-
 @media(max-width: 480px){
-  body {
-    background-color: #8a719c;
-  }
-
+ body {
+    background-color: #064420;
+ }
   .card {
     width: 2.6em;
     height: 3.6em;
@@ -70,11 +61,11 @@ h1 {
  #chips {
   font-size: 3.5vw;
   line-height: 24px; 
-}
+ }
 #bets {
   font-size: 3.5vw;
   line-height: 18px;
-}
+ }
 .container {
     display: grid;
     grid-template-columns: repeat(3, auto);
@@ -82,12 +73,12 @@ h1 {
     justify-content: center;
  }
  #message {
-  color: yellow;
+  color: rgb(228, 228, 151);
   font-size: 4vmin; 
   font-weight: bold; 
  }
 h2 {
-  color: black;
+  color: white;
   font-size: 3vmin;
   letter-spacing: 1vmin;
  }
@@ -95,5 +86,4 @@ button {
   margin-top: 0;
   color: black;
  }
-
 }
