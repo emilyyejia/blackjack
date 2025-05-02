@@ -129,11 +129,11 @@ function drawCard() {
 } 
 
 function renderCard(card, role, roleNum) {
-    const playerHandContainer = document.querySelector(`#${role}-${roleNum}`);
-    const newHtml = document.createElement("div");
-    newHtml.id = `${role}-${roleNum}`;
-    newHtml.className = `card large ${card.card} shadow animate__animated animate__flipInY`;
-    playerHandContainer.replaceWith(newHtml);
+    const oldCard = document.querySelector(`#${role}-${roleNum}`);
+    const newCard = document.createElement("div");
+    newCard.id = `${role}-${roleNum}`;
+    newCard.className = `card large ${card.card} shadow animate__animated animate__flipInY`;
+    oldCard.replaceWith(newCard);
 }
 
 function deal() {
@@ -168,6 +168,15 @@ function stand() {
         win();
     } else if (dealerTotal === 21) {
         lose();
+        if(currentChips === 0) {
+            setTimeout(() => {
+                renderMessages('shuffled');
+            }, 2000);
+            setTimeout(() => {
+                init();
+            }, 3000);    
+        }
+        
     } else if (playerTotal > dealerTotal){
         win();
     } else if (playerTotal === dealerTotal) {
@@ -184,8 +193,7 @@ function stand() {
         } 
     }
 
-}
-    
+}    
 
 function hit() {
     const cardIdx = Math.floor(Math.random() * 52);
