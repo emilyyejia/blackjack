@@ -172,18 +172,22 @@ function stand() {
         win();
     } else if (playerTotal === dealerTotal) {
         push();
-    } else lose();
-    if(currentChips === 0) {
-        setTimeout(() => {
-            renderMessages('shuffled');
-        }, 2000);
-        setTimeout(() => {
-            init();
-        }, 3000);
-    } 
-}
+    } else {
+        lose();
+        if(currentChips === 0) {
+            setTimeout(() => {
+                renderMessages('shuffled');
+            }, 2000);
+            setTimeout(() => {
+                init();
+            }, 3000);
+        } 
+    }
 
-function hit(event) {
+}
+    
+
+function hit() {
     const cardIdx = Math.floor(Math.random() * 52);
     const newCard = board[cardIdx];
     const card = {
@@ -196,6 +200,14 @@ function hit(event) {
     playerTotal = checkTotal(playerHand);
     if (playerTotal > 21) {
         lose();
+        if(currentChips === 0) {
+            setTimeout(() => {
+                renderMessages('shuffled');
+            }, 2000);
+            setTimeout(() => {
+                init();
+            }, 3000);
+        }
     } 
     if (playerTotal === 21) {
         win();
