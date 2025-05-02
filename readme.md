@@ -54,7 +54,7 @@ This is the best hand.
 
 ### Link
 
-- Deployed Link （https://emilyyejia.github.io/blackjack/）
+- Deployed Link https://emilyyejia.github.io/blackjack/
 
 ## Upcoming Features
 
